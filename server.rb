@@ -9,7 +9,9 @@ end
 get '/movies' do
   @title = "Movie Index"
   @pagename = params[:page]
-  @query = params[:query]
+  if params[:query]
+    @query = params[:query].split
+  end
   @data = build_data().sort_by { |moviehash| moviehash["title"].downcase }
   if !@query.nil?
     @results = search_results(@data, @query)
