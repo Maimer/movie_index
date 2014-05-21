@@ -1,10 +1,18 @@
+<form action="/movies" method="get">
+  <label for="query">Find a Movie! </label>
+  <input type="text" name="query" id="query" />
+  <input type="submit" value="Search" />
+</form>
+
 <ul>
-  <% @data.each do |movie| %>
-    <li><a href="/movies/<%= movie["id"] %>"><%= movie["title"] %></a></li>
+  <% @data.each_with_index do |movie, i| %>
+    <% if i >= ((@pagename.to_i-1) * 20) && i < (((@pagename.to_i-1) * 20) + 20) %>
+      <li><a href="/movies/<%= movie["id"] %>"><%= movie["title"] %></a></li>
+    <% end %>
   <% end %>
 </ul>
 
 <% (@data.size/20.0).ceil.times do |i| %>
-  <a href="/movies?page=<%= i %>"><%= i %></a> |
+  <a href="/movies?page=<%= i+1 %>"><%= i+1 %></a><% if i+1 < (@data.size/20.0).ceil %> | <% end %>
 <% end %>
 

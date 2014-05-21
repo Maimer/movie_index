@@ -1,12 +1,14 @@
 require 'sinatra'
 require_relative 'helpers'
+require 'pry'
 
 get '/' do
-  redirect '/movies'
+  redirect '/movies?page=1'
 end
 
 get '/movies' do
   @title = "Movie Index"
+  @pagename = params[:page]
   @data = build_data().sort_by { |moviehash| moviehash["title"] }
   erb :'movies/index'
 end
