@@ -7,3 +7,19 @@ def build_data
   end
   dataset
 end
+
+def find_id(data, id)
+  data.each do |movie|
+    if movie["id"] == id
+      return movie["title"]
+    end
+  end
+end
+
+def find_movie(data, id)
+  data.each do |movie|
+    if movie["id"] == id
+      return movie
+    end
+  end
+end
