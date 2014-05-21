@@ -12,7 +12,16 @@
   <% end %>
 </ul>
 
-<% (@data.size/20.0).ceil.times do |i| %>
-  <a href="/movies?page=<%= i+1 %>"><%= i+1 %></a><% if i+1 < (@data.size/20.0).ceil %> | <% end %>
+<% if !@query.nil? %>
+  <ul>
+    <% @results.each do |movie| %>
+      <li><a href="/movies/<%= movie.keys[0] %>"><%= movie.values[0] %></a></li>
+    <% end %>
+  </ul>
 <% end %>
 
+<% if !@pagename.nil? %>
+  <% (@data.size/20.0).ceil.times do |i| %>
+    <a href="/movies?page=<%= i+1 %>"><%= i+1 %></a><% if i+1 < (@data.size/20.0).ceil %> | <% end %>
+  <% end %>
+<% end %>

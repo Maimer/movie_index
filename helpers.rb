@@ -23,3 +23,19 @@ def find_movie(data, id)
     end
   end
 end
+
+def search_results(data, query)
+  results = []
+  data.each do |movie|
+    titlewords = movie["title"].downcase.split
+    if movie["synopsis"] != nil
+      synopsiswords = movie["synopsis"].downcase.split
+    end
+    if titlewords.include?(query.downcase) ||
+      ((movie["synopsis"].nil? == false) &&
+      synopsiswords.include?(query))
+      results << { movie["id"] => movie["title"] }
+    end
+  end
+  results
+end

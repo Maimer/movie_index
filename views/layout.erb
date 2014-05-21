@@ -2,12 +2,14 @@
 <html lang="en">
   <head>
     <title><%= @title %></title>
-    <!-- <link rel="stylesheet" href="home.css" /> -->
+    <link rel="stylesheet" href="home.css" />
   </head>
 
   <body>
+    <div class="wrapper">
+      <a href="/"><h3>HOME</h3></a>
 
-    <%= yield %>
-
+      <%= yield %>
+    </div>
   </body>
 </html>
