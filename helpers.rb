@@ -28,19 +28,21 @@ def search_results(data, query)
   results = []
   data.each do |movie|
     count = 0
+    wordsmatched = []
     titlewords = movie["title"].downcase.split
     if movie["synopsis"] != nil
       synopsiswords = movie["synopsis"].downcase.split
     end
       query.each do |word|
-      if titlewords.include?(word.downcase) ||
+      if (titlewords.include?(word.downcase) ||
         ((movie["synopsis"].nil? == false) &&
-        synopsiswords.include?(word.downcase))
+        synopsiswords.include?(word.downcase)))
+        wordsmatched << word
         count += 1
-        if count == query.size
-          results << { movie["id"] => movie["title"] }
-        end
       end
+    end
+    if count > 0
+      results << { movie["id"] => movie["title"], (count.to_f/(query.size).to_f * 100).round => wordsmatched }
     end
   end
   results

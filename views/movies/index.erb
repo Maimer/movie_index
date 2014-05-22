@@ -14,8 +14,11 @@
 
 <% if !@query.nil? %>
   <ul>
-    <% @results.each do |movie| %>
-      <li><a href="/movies/<%= movie.keys[0] %>"><%= movie.values[0] %></a></li>
+    <% @results.reverse_each do |movie| %>
+      <li><a href="/movies/<%= movie.keys[0] %>"><%= movie.values[0] %></a> - (<%= movie.keys[1] %>% Match) [
+      <% movie.values[1].each do |word| %>
+        <%= word.capitalize %><% if movie.values[1][-1] != word %>, <% end %>
+      <% end %>]</li>
     <% end %>
   </ul>
 <% end %>

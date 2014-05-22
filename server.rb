@@ -14,7 +14,7 @@ get '/movies' do
   end
   @data = build_data().sort_by { |moviehash| moviehash["title"].downcase }
   if !@query.nil?
-    @results = search_results(@data, @query)
+    @results = search_results(@data, @query).sort_by { |resultshash| resultshash.values[1] }
   end
   erb :'movies/index'
 end
